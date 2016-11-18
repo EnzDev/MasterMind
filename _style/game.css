@@ -1,0 +1,250 @@
+/* Copyright (c) 2016 Copyright Enzo Mallard, All Rights Reserved. */
+/* !!! Opacity of the noise is 0.1 !!! */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Source+Sans+Pro');
+
+
+
+/*
+font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
+*/
+
+
+
+body{
+  background-color: #403B51;
+  color: rgba(17,17,34,.5);
+}
+
+#title{
+  font-family: 'Roboto', sans-serif;
+  font-size: 10vh;
+  font-weight: 900;
+  font-variant: small-caps;
+}
+
+#id, #submit{
+  font-size: 2.5vh;
+  font-variant: small-caps;
+  right: 2vh;
+  position: absolute;
+  top: 2vh;
+  font-family: serif;
+
+    color: rgba(215, 215, 255, 0.5);
+}
+#submit{
+color: rgba(215, 215, 255, 0.5);
+  position: initial;
+  display: flex;
+  align-items: center;
+  font-size: 3vh;
+}
+a, #submit.ok {
+  text-shadow: rgba(0,17,51,0.31) 2px 2px 2px;
+  cursor: pointer;
+}
+
+#submit.ok > div{
+    /*box-shadow: 0 0 1vh #222 inset;*/
+    background-color: #060609;
+}
+
+#submit > div {
+  background-color: #556;
+  padding: 1.5vh;
+  border-radius: 1.5vh;
+}
+
+#noise{
+  position: fixed;
+  background: url("../_img/noise.png");
+  opacity: 0.02;
+
+  height: 100vh;
+  width:  100vw;
+  top:  0;
+  left: 0;
+
+  pointer-events: none; /* Disable interactions */
+}
+
+#board, #result{
+  flex-direction: column;
+  height: 100vh;
+}
+
+#result{
+  width: 20vw;
+  align-items: center;
+}
+
+#container{
+  display: flex;
+  flex-flow: row;
+}
+
+#container > div, #board > div, #result {
+  display: flex;
+  justify-content: space-around;
+}
+
+#before{
+  height: 12vh;
+  align-items: center;
+}
+
+#head, #try {
+  width: 80vw;
+
+}
+
+#head > ul {
+  height: 6vh;
+  width: 6vh;
+
+  /*background-color: #981;*/
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+#try > ul, #solution {
+  height: 43vh;
+  width: 8vh;
+
+  /*background-color: #189;*/
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: column;
+}
+
+#solution{
+  background-color: rgba(0,17,51,.2);
+  box-shadow: RGBA(50, 50, 50, .5) -1vh 1vh 1vh .1vh inset;
+}
+
+#colors{
+  height: 10vh;
+}
+
+#colors > ul {
+  display: flex;
+  width: 40vw;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+#colors>ul>li,.current > li:not(.undefined){cursor: grab;}
+
+#try > ul>li,#head > ul>li, #colors > ul > li, #solution.revealed > li{
+  /*background-color: #27f;*/
+  background: url("../_img/empty.png");
+  background-size: 100%;
+
+  width: 5vh;
+  height: 5vh;
+  /*display: inline-flex;*/
+  border-radius: 50%;
+}
+#head > ul>li{
+  /*background-color: green;*/
+  width: 2.5vh;
+  height: 2.5vh;
+}
+
+#solution > li{
+  width: 5vh;
+  height: 5vh;
+  /*display: inline-flex;*/
+  border-radius: 50%;
+}
+ #solution.unrevealed > li{
+   display: none;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* COLORATION */
+/* "rouge", "jaune", "vert", "bleu", "orange", "blanc", "violet", "fuchsia" */
+.black {background: black           !important;}
+.red   {background: rgb(170,33,33)  !important;}
+.green {background: rgb(46,142,31)  !important;}
+.blue  {background: rgb(19,60,130)  !important;}
+.orange{background: rgb(217,135,12) !important;}
+.white {background: white           !important;}
+.purple{background: rgb(99,59,173)  !important;}
+.pink  {background: rgb(149,16,148) !important;}
+.yellow{background: rgb(187,187,43) !important}
+/*.{background: ;}*/
+
+
+#box{
+  display: block;
+  height: 43vh;
+  width: 8vh;
+  pointer-events: none;
+  position: fixed;
+  background: rgb(34, 34, 34) none repeat scroll 0% 0%;
+  top: 36vh;
+  left: calc(90vw + 4vh);
+  transition: transform 2s ease 0s;
+  transform-origin: left center 0px;
+  transform: perspective(30vw) rotateY(-180deg);
+}
+
+#box.open {
+   transform: perspective(30vw) rotateY(-25deg) !important;
+}
+
+
+
+
+
+
+
+
+
+
+.container{
+  position: fixed;
+  top: 3vh;
+  left: 3vh;
+  width: calc(100vw - 6vh);
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+iframe{
+  width: calc(100vw - 6vh);
+  height: 100vh;
+  margin-top: 0.5vh;
+  border-radius: calc((1vh + 1vw) / 2);
+}
+
+.container > a {
+  background-image: url("http://www.clker.com/cliparts/5/4/1/5/1194984432596285992cross_hand_drawn_linda_k_01.svg");
+  background-size: 100%;
+  height: 4vh;
+  width: 4vh;
+  text-indent: 105vw;
+}
