@@ -53,7 +53,7 @@ class router {
         $this->gameCtl->launch($doReset);
       }
     }else { // Not normal...
-      (new errorV())->raise();
+      (new errorV())->raise("gutten");
     }
 
   }

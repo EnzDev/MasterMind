@@ -10,7 +10,7 @@
      $this->chaine=$chaine;
    }
 
-   public function afficher(){ return $this->chaine; }
+   public function afficher(){ print_r( $this->chaine ); }
 
  }
 
@@ -24,6 +24,8 @@
  // User doesnt exist in table
  class UserInvalidException extends MonException{}
 
+ // User doesnt exist in table
+ class UserExistException extends MonException{}
 
  // Classe qui gère les accès à la base de données
 
@@ -36,7 +38,7 @@
    public function __construct(){
     try{
        $chaine="mysql:host=localhost;dbname=E155122L";
-       $this->connexion = new PDO($chaine,"E155122L","E155122L");
+       $this->connexion = new PDO($chaine,"root","");
        $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       }
      catch(PDOException $e){
@@ -48,12 +50,12 @@
 
 
 
- // A développer
+
  // méthode qui permet de se deconnecter de la base
  public function deconnexion(){ $this->connexion=null; }
 
 
- //A développer
+
  // utiliser une requête classique
  // méthode qui permet de récupérer les pseudos dans la table pseudo
  // post-condition:
@@ -75,8 +77,8 @@
 
  public function getPass($user){
     try{
-    
-    $statement=$this->connexion->query("SELECT motDePasse FROM joueurs WHERE pseudo=\"".$user."\";");
+
+    $statement=$this->connexion->query("SELECT motDePasse FROM joueurs WHERE pseudo=\"".$user."\";"); // CAN BE OVVERID WITH DEADLY THINGS
 
      while($ligne=$statement->fetch()){ $password=$ligne['motDePasse']; }
      if (!isset($password)) { throw new UserInvalidException("Pseudo invalide"); } // devrais être check avant
@@ -86,6 +88,79 @@
      throw new TableAccesException("problème avec la table pseudonyme");
    }
  }
+
+ public function addGame($user, $coup, $win=0){
+   try{
+   	$statement = $this->connexion->prepare("INSERT INTO `parties`(`pseudo`, `partieGagnee`, `nombreCoups`) VALUES (?,?,?);");
+   	$statement->bindParam(1, $user);
+    $statement->bindParam(2, $win);
+    $statement->bindParam(3, $coup);
+
+   	$statement->execute();
+
+   }
+   catch(PDOException $e){
+       $this->deconnexion();
+       throw new TableAccesException("problème avec la table pseudonyme");
+  }
+ }
+
+ public function getBestGame($user){
+   try{
+     	$statement = $this->connexion->prepare("SELECT partieGagnee, nombreCoups FROM parties ;");
+     	$statement->bindParam(1, $user);
+      $statement->bindParam(2, $hashPass);
+
+     	$statement->execute();
+
+     }
+     catch(PDOException $e){
+         $this->deconnexion();
+
+
+         throw new TableAccesException("problème avec la table pseudonyme");
+    }
+
+ }
+
+ public function addUser($user, $hashPass){
+ try{
+   	$statement = $this->connexion->prepare("INSERT INTO `joueurs`(`pseudo`, `motDePasse`) VALUES (?,?);");
+   	$statement->bindParam(1, $user);
+    $statement->bindParam(2, $hashPass);
+
+   	$statement->execute();
+
+   }
+   catch(PDOException $e){
+       $this->deconnexion();
+
+       if ($e->getCode() == 23000) {
+         throw new UserExistException("Le pseudo est déjà pris");
+
+       }
+
+       throw new TableAccesException("problème avec la table pseudonyme");
+  }
+ }
+
+ public function avgCoups($user){
+   try{
+     	$statement = $this->connexion->prepare('SELECT AVG(nombreCoups) from parties where pseudo=? and partieGagnee=1');
+      $statement->bindParam(1, $user);
+
+      $statement->execute();
+      $result = $statement->fetch()[0];
+      if (empty($result)){ throw new TableAccesException("What did you do ?", 1); }
+      return $result;
+
+ }catch(PDOException $e){
+     $this->deconnexion();
+
+
+     throw new TableAccesException("problème avec la table pseudonyme");
+   }
+}
 
 }
 

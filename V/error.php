@@ -5,7 +5,8 @@
 class errorV {
 
   function __construct(){}
-  function raise(){
-    ?>Mheeeeeeee !<?php
+  function raise($error){
+    ?>Mheeeeeeee !<br><?php
+    echo $error;
   }
 }

@@ -11,18 +11,35 @@ font-family: 'Open Sans', sans-serif;
 font-family: 'Source Sans Pro', sans-serif;
 */
 
-
+/*body:not(.loaded){ display: none;}*/
 
 body{
-  background-color: #403B51;
-  color: rgba(17,17,34,.5);
+  background-color: #0D0529;
+  /*background-image: url("../_img/background.jpg");*/
+  color: rgba(220,220,211,.5);
+/*
+  filter: blur(2px);
+  transition: filter 0.2s ease;*/
 }
+
+/*body:hover{ filter: blur(0);}*/
 
 #title{
   font-family: 'Roboto', sans-serif;
   font-size: 10vh;
   font-weight: 900;
   font-variant: small-caps;
+  /*text-shadow: rgba(40,40,40,0.1) 1px 1px;
+  color: rgba(0,0,0,0);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  background-color: #666666;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: rgba(255,255,255,0.5) 0px 0.2vh 0.2vh;*/
+  color: rgba(210, 210, 225, 0.6);
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
 }
 
 #id, #submit{
@@ -55,7 +72,7 @@ a, #submit.ok {
 #submit > div {
   background-color: #556;
   padding: 1.5vh;
-  border-radius: 1.5vh;
+  border-radius: 1vh;
 }
 
 #noise{
@@ -145,14 +162,15 @@ a, #submit.ok {
 #colors>ul>li,.current > li:not(.undefined){cursor: grab;}
 
 #try > ul>li,#head > ul>li, #colors > ul > li, #solution.revealed > li{
-  /*background-color: #27f;*/
-  background: url("../_img/empty.png");
-  background-size: 100%;
+  background-color: #696969;
+  /*background: url("../_img/empty.png");*/
+  background-size: 10%;
 
   width: 5vh;
   height: 5vh;
   /*display: inline-flex;*/
-  border-radius: 50%;
+  border-radius: 10%;
+  border: 1px solid rgba(0,0,0,0.5);
 }
 #head > ul>li{
   /*background-color: green;*/
@@ -184,7 +202,7 @@ a, #submit.ok {
 
 /* COLORATION */
 /* "rouge", "jaune", "vert", "bleu", "orange", "blanc", "violet", "fuchsia" */
-.black {background: black           !important;}
+.black {background: black           !important; border: 1px solid rgba(255,255,255,0.5) !important;}
 .red   {background: rgb(170,33,33)  !important;}
 .green {background: rgb(46,142,31)  !important;}
 .blue  {background: rgb(19,60,130)  !important;}
@@ -192,7 +210,7 @@ a, #submit.ok {
 .white {background: white           !important;}
 .purple{background: rgb(99,59,173)  !important;}
 .pink  {background: rgb(149,16,148) !important;}
-.yellow{background: rgb(187,187,43) !important}
+.yellow{background: rgb(187,187,43) !important }
 /*.{background: ;}*/
 
 
@@ -248,3 +266,39 @@ iframe{
   width: 4vh;
   text-indent: 105vw;
 }
+
+
+
+
+
+/* NOTE: MENU */
+
+#menu::before {
+    content: "\f0c9";
+    font: normal normal normal 14vh/1 FontAwesome;
+    font-size: 4vh;
+    text-rendering: auto;
+    position: absolute;
+    left: -5vh;
+    top: 1vh;
+    /*background: #0049f8;*/
+    cursor: pointer;
+}
+
+#menu.active {
+    width: 20vw;
+}
+
+#menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: #149911;
+    height: 100vh;
+    width: 0vw;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.5s;
+}
+
+#m_cont{ background: #d75516; }

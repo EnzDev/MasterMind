@@ -17,7 +17,7 @@ class Game {
     for ($n=0; $n < 4; $n++) {
       $this->solution[$n] = randomElement($this->COLORS);
     }
-    $this->v = 12;
+    $this->v = 10;
     error_log(serialize($this->solution));
 
   }
@@ -30,6 +30,7 @@ class Game {
     $states = array();
     $soluceM = $this->solution;
     foreach ($testArray as $key => $value) {
+      $states[$key] = -1;
       if ($value==$this->solution[$key]) {
         // echo $this->solution[$key]." = ".$value."<br>";
         $states[$key] = 2;
@@ -40,7 +41,8 @@ class Game {
       if ($states[$key] != 2 && in_array($value,$soluceM) ) {
         // echo $value." in ".implode("|",$this->solution)."<br>";
         $states[$key] = 1;
-      }elseif($states[$key] != 2){
+        $soluceM[array_search($value,$soluceM)] = "modified";
+      }else if($states[$key] != 2){
         // echo $value." not in ".implode("|",$this->solution)."<br>";
         $states[$key] = 0;
       }
@@ -58,16 +60,12 @@ class Game {
   */
   public function play($case){
     $this->proposition[] = $case;
-    print_r($case);
+    // print_r($case);
     $this->results[] = $this->testACase($case);
-    print_r($case);
+    // print_r($case);
     return $this->hasWin($case);
   }
 
-  function sout(){
-    print_r($this->solution);
-    print_r($this->proposition);
-  }
 
   public function isTheEnd(){
     return count($this->proposition)>=$this->v || $this->hasWin() ;
@@ -76,6 +74,11 @@ class Game {
   public function getL(){
     return $this->v;
   }
+
+  public function getCpt(){
+    return count($this->proposition);
+  }
+
 }
 
 
