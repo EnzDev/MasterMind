@@ -18,6 +18,7 @@ class router {
   function __construct() {
     $this->authCtl = new AuthCtl();
     $this->gameCtl = new GameCtl();
+    $this->db      = new DB();
   }
 
   public function routerReq()  {
@@ -43,7 +44,8 @@ class router {
     }elseif (!isset($_SESSION["online"]) || $_SESSION["online"]==false){ (new Home())->launch();
     }elseif ($_SESSION["online"]==true) {
       if (isset($_GET["stat"])) {
-        (new results())->launch();
+        // $status = isset($_SESSION["started"]) && $_SESSION["started"]  ?
+        (new results())->launch($_SESSION["username"],0,$this->db->avgCoups($_SESSION["username"]) );
       }else{
         if (isset($_POST["play"])) {
           $this->gameCtl->play($_POST["play"]);

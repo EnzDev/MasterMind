@@ -1,43 +1,16 @@
 /* Copyright (c) 2016 Copyright Enzo Mallard, All Rights Reserved. */
-/* !!! Opacity of the noise is 0.1 !!! */
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Source+Sans+Pro');
 
-
-
-/*
-font-family: 'Roboto', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-family: 'Source Sans Pro', sans-serif;
-*/
-
-/*body:not(.loaded){ display: none;}*/
-
 body{
   background-color: #0D0529;
-  /*background-image: url("../_img/background.jpg");*/
-  color: rgba(220,220,211,.5);
-/*
-  filter: blur(2px);
-  transition: filter 0.2s ease;*/
+    color: rgba(220,220,211,.5);
 }
-
-/*body:hover{ filter: blur(0);}*/
-
 #title{
   font-family: 'Roboto', sans-serif;
   font-size: 10vh;
   font-weight: 900;
   font-variant: small-caps;
-  /*text-shadow: rgba(40,40,40,0.1) 1px 1px;
-  color: rgba(0,0,0,0);
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  background-color: #666666;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: rgba(255,255,255,0.5) 0px 0.2vh 0.2vh;*/
   color: rgba(210, 210, 225, 0.6);
   text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
 }
@@ -65,8 +38,7 @@ a, #submit.ok {
 }
 
 #submit.ok > div{
-    /*box-shadow: 0 0 1vh #222 inset;*/
-    background-color: #060609;
+        background-color: #060609;
 }
 
 #submit > div {
@@ -121,9 +93,6 @@ a, #submit.ok {
 #head > ul {
   height: 6vh;
   width: 6vh;
-
-  /*background-color: #981;*/
-
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -133,9 +102,6 @@ a, #submit.ok {
 #try > ul, #solution {
   height: 43vh;
   width: 8vh;
-
-  /*background-color: #189;*/
-
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -163,42 +129,26 @@ a, #submit.ok {
 
 #try > ul>li,#head > ul>li, #colors > ul > li, #solution.revealed > li{
   background-color: #696969;
-  /*background: url("../_img/empty.png");*/
-  background-size: 10%;
+    background-size: 10%;
 
   width: 5vh;
   height: 5vh;
-  /*display: inline-flex;*/
-  border-radius: 10%;
+    border-radius: 10%;
   border: 1px solid rgba(0,0,0,0.5);
 }
 #head > ul>li{
-  /*background-color: green;*/
-  width: 2.5vh;
+    width: 2.5vh;
   height: 2.5vh;
 }
 
 #solution > li{
   width: 5vh;
   height: 5vh;
-  /*display: inline-flex;*/
-  border-radius: 50%;
+    border-radius: 50%;
 }
  #solution.unrevealed > li{
    display: none;
  }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* COLORATION */
 /* "rouge", "jaune", "vert", "bleu", "orange", "blanc", "violet", "fuchsia" */
@@ -211,9 +161,6 @@ a, #submit.ok {
 .purple{background: rgb(99,59,173)  !important;}
 .pink  {background: rgb(149,16,148) !important;}
 .yellow{background: rgb(187,187,43) !important }
-/*.{background: ;}*/
-
-
 #box{
   display: block;
   height: 43vh;
@@ -231,16 +178,6 @@ a, #submit.ok {
 #box.open {
    transform: perspective(30vw) rotateY(-25deg) !important;
 }
-
-
-
-
-
-
-
-
-
-
 .container{
   position: fixed;
   top: 3vh;
@@ -267,10 +204,6 @@ iframe{
   text-indent: 105vw;
 }
 
-
-
-
-
 /* NOTE: MENU */
 
 #menu::before {
@@ -281,9 +214,12 @@ iframe{
     position: absolute;
     left: -5vh;
     top: 1vh;
-    /*background: #0049f8;*/
     cursor: pointer;
+    transform: rotate(0deg);
+    transition: 0.5s;
 }
+
+#menu.active::before { transform: rotate(90deg); }
 
 #menu.active {
     width: 20vw;
