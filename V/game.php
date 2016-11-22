@@ -80,9 +80,9 @@ $points = array(0 =>"undefined" ,1=>"white", 2=>"black" );
     <div id="noise"></div>
 
     <div id="menu" class="">
+      <div id="blur"></div>
       <div id="m_cont">
-          <div class=""></div>
-          <?php for ($p=0; $p < 5 ; $p++) { echo "<div>haha</div>"; } ?>
+          <iframe src="?stat"></iframe>
       </div>
     </div>
 

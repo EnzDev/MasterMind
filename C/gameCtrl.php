@@ -41,6 +41,9 @@ class GameCtl{
     $res = $_SESSION["game"]->play($move);
   }
 
+  function win(){
+    return $_SESSION["game"]->hasWin();
+  }
 
   public function doTheEndingThing(){
     // echo "yaay ".($_SESSION["game"]->hasWin()?"lol":"huhu");

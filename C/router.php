@@ -44,8 +44,13 @@ class router {
     }elseif (!isset($_SESSION["online"]) || $_SESSION["online"]==false){ (new Home())->launch();
     }elseif ($_SESSION["online"]==true) {
       if (isset($_GET["stat"])) {
-        // $status = isset($_SESSION["started"]) && $_SESSION["started"]  ?
-        (new results())->launch($_SESSION["username"],0,$this->db->avgCoups($_SESSION["username"]) );
+        $status = isset($_SESSION["started"]) && $_SESSION["started"]  ? 9 : $this->gameCtl->win();
+        (new results())->launch(
+          $_SESSION["username"],
+          $status,
+          $this->db->avgCoups($_SESSION["username"]),
+          $this->db->leaderBoard()
+        );
       }else{
         if (isset($_POST["play"])) {
           $this->gameCtl->play($_POST["play"]);
@@ -55,7 +60,7 @@ class router {
         $this->gameCtl->launch($doReset);
       }
     }else { // Not normal...
-      (new errorV())->raise("gutten");
+      (new errorV())->raise("gutten Tag");
     }
 
   }

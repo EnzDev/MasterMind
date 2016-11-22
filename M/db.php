@@ -78,7 +78,10 @@
  public function getPass($user){
     try{
 
-    $statement=$this->connexion->query("SELECT motDePasse FROM joueurs WHERE pseudo=\"".$user."\";"); // CAN BE OVVERID WITH DEADLY THINGS
+    $statement=$this->connexion->prepare("SELECT motDePasse FROM joueurs WHERE pseudo=?;");
+    $statement->bindParam(1, $user);
+
+    $statement->execute();
 
      while($ligne=$statement->fetch()){ $password=$ligne['motDePasse']; }
      if (!isset($password)) { throw new UserInvalidException("Pseudo invalide"); } // devrais être check avant
@@ -162,6 +165,32 @@
    }
 }
 
+
+public function leaderBoard(){
+  // NOTE : This is a directy implementation...
+  try{
+    $gameTable = "CREATE TEMPORARY TABLE xG  (SELECT p.pseudo pseudo, COUNT(*) games FROM joueurs j, parties p WHERE j.pseudo=p.pseudo GROUP BY p.pseudo);";
+    $winTable  = "CREATE TEMPORARY TABLE xW  (SELECT p.pseudo pseudo, COUNT(*) win   FROM joueurs j, parties p WHERE j.pseudo=p.pseudo AND p.partieGagnee=1 GROUP BY p.pseudo);";
+    $averTable = "CREATE TEMPORARY TABLE xV  (SELECT p.pseudo pseudo, AVG(p.nombreCoups) aver FROM joueurs j, parties p where j.pseudo=p.pseudo AND partieGagnee=1 GROUP BY p.pseudo);";
+    $joinSel   = "SELECT xG.pseudo, games, win, aver from xG, xW, xV where xG.pseudo=xW.pseudo and xV.pseudo=xW.pseudo;";
+
+    $this->connexion->query($gameTable);
+    $this->connexion->query($winTable);
+    $this->connexion->query($averTable);
+
+    $statement=$this->connexion->query($joinSel);
+
+    return $statement->fetchAll();
+
+    }
+    catch(PDOException $e){
+        $this->deconnexion();
+
+        throw new TableAccesException("problème de table");
+   }
+
+
+}
 }
 
 

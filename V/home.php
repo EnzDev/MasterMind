@@ -30,7 +30,7 @@
           <input name="password" id="input_password" class="textfield" type="password">
         </div>
 
-        <input value="Go" type="submit">
+        <input value="Login" type="submit">
         </fieldset>
     </form>
 
