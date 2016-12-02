@@ -27,4 +27,13 @@ class AuthCtl{
     }
   }
 
+  function adduser($user, $password){
+    try {
+        $this->db->addUser($user, crypt($password));
+        return 0;
+      } catch (UserExistException $e) {
+        return -1; // User doesnt exist
+      }
+    }
+
 }

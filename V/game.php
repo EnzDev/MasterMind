@@ -19,7 +19,7 @@ $points = array(0 =>"undefined" ,1=>"white", 2=>"black" );
   </head>
 
 
-  <body style="background-image: url('../_img/background.jpg');">
+  <body style="/*background-image: url('./_img/background.jpg');*/">
     <div id="container">
       <!-- <div style="width:5vw;"></div> -->
       <div id="board">
@@ -76,7 +76,12 @@ $points = array(0 =>"undefined" ,1=>"white", 2=>"black" );
       </div>
     </div>
 
-    <div id="box"></div>
+    <div class="box_c">
+      <div style="height:12vh;"></div>
+      <div style="height:6vh;"></div>
+      <div id="box"></div>
+      <div style="height:10vh;"></div>
+    </div>
     <div id="noise"></div>
 
     <div id="menu" class="">

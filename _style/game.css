@@ -3,11 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Source+Sans+Pro');
 
 body{
-  background-color: #0D0529;
-    color: rgba(220,220,211,.5);
+  /*background-color: #0D0529;*/
+  background: #fff;
+  color: rgba(220,220,211,.5);
+  font-family: "Droid Sans", sans-serif;
+  font-variant: small-caps;
 }
 #title{
-  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
   font-size: 10vh;
   font-weight: 900;
   font-variant: small-caps;
@@ -21,24 +24,24 @@ body{
   right: 2vh;
   position: absolute;
   top: 2vh;
-  font-family: serif;
+  /*font-family: serif;*/
 
     color: rgba(215, 215, 255, 0.5);
 }
 #submit{
-color: rgba(215, 215, 255, 0.5);
+color: #fff;
   position: initial;
   display: flex;
   align-items: center;
   font-size: 3vh;
 }
 a, #submit.ok {
-  text-shadow: rgba(0,17,51,0.31) 2px 2px 2px;
+  text-shadow: #417cb8 2px 2px 2px;
   cursor: pointer;
 }
 
 #submit.ok > div{
-        background-color: #060609;
+        background-color: #417cb8;
 }
 
 #submit > div {
@@ -49,7 +52,7 @@ a, #submit.ok {
 
 #noise{
   position: fixed;
-  background: url("../_img/noise.png");
+  background: url("./_img/noise.png");
   opacity: 0.02;
 
   height: 100vh;
@@ -63,6 +66,7 @@ a, #submit.ok {
 #board, #result{
   flex-direction: column;
   height: 100vh;
+  justify-content: space-between !important;
 }
 
 #result{
@@ -128,7 +132,7 @@ a, #submit.ok {
 #colors>ul>li,.current > li:not(.undefined){cursor: grab;}
 
 #try > ul>li,#head > ul>li, #colors > ul > li, #solution.revealed > li{
-  background-color: #696969;
+  background-color: #AAA;
     background-size: 10%;
 
   width: 5vh;
@@ -166,17 +170,14 @@ a, #submit.ok {
   height: 43vh;
   width: 8vh;
   pointer-events: none;
-  position: fixed;
   background: rgb(34, 34, 34) none repeat scroll 0% 0%;
-  top: 36vh;
-  left: calc(90vw + 4vh);
   transition: transform 2s ease 0s;
   transform-origin: left center 0px;
-  transform: perspective(30vw) rotateY(-180deg);
+  /*transform: perspective(30vw) rotateY(-180deg);*/
 }
 
 #box.open {
-   transform: perspective(30vw) rotateY(-25deg) !important;
+    transform: perspective(30vw) rotateY(-120deg) !important;
 }
 .container{
   position: fixed;
@@ -251,7 +252,7 @@ iframe{
   height: 100vh;
   width: 100%;
   z-index: 2;
-  background-image: url('../_img/background.jpg');
+  background-image: url('./_img/background.jpg');
   filter: blur(0vh);
   transition: background-position 0.5s, filter 0.5s;
 }
@@ -260,3 +261,23 @@ iframe{
     background-position: -80vw 0 !important;
     filter: blur(1.5vh) !important;
 }
+
+.box_c {
+    display: flex;
+    height: 100vh;
+    width: 8vh;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: calc(90vw + 4vh);
+    transition: transform 2s ease 0s;
+    transform-origin: left center 0px;
+    transform: perspective(30vw) rotateY(-180deg);
+    justify-content: space-between !important;
+    flex-direction: column;
+}
+
+
+/*#solution{
+  box-shadow: -0.56191px 1.39078px 0px #CEE1F5, -1.12382px 2.78155px 0px #CEE1F5, -1.68573px 4.17233px 0px #CEE1F5, -2.24764px 5.5631px 0px #CEE1F5, -2.80955px 6.95388px 0px #CEE1F5, -3.37146px 8.34466px 0px #CEE1F5, -3.93337px 9.73543px 0px #CEE1F5, -4.49528px 11.1262px 0px #CEE1F5, -5.05719px 12.517px 0px #CEE1F5, -5.6191px 13.9078px 0px #CEE1F5, -6.18101px 15.2985px 0px #CEE1F5, -6.74292px 16.6893px 0px #CEE1F5, -7.30483px 18.0801px 0px #CEE1F5, -7.86674px 19.4709px 0px #CEE1F5, -8.42865px 20.8616px 0px #CEE1F5, -8.99056px 22.2524px 0px #CEE1F5;
+}*/
