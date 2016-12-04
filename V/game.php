@@ -46,7 +46,9 @@ $points = array(0 =>"undefined" ,1=>"white", 2=>"black" );
 
             <ul <?php if ($i==$len) { echo 'class="current"'; } ?>>
             <?php for ($j=0; $j < 4; $j++) { ?>
-              <li class="<?php echo isset($test[$i][$j])?$assoc[$test[$i][$j]]:'undefined' ?>"<?php if ($i==$len){ echo ' ondrop="drop(event)" ondragover="allowDrop(event)"'; }?>></li>
+              <li class="<?php echo isset($test[$i][$j])?$assoc[$test[$i][$j]]:'undefined' ?>"
+                <?php if($i<$len){ echo ' draggable="true" ondragstart="drag(event)" ';} ?>
+                <?php if ($i==$len){ echo ' ondrop="drop(event)" ondragover="allowDrop(event)"'; }?>></li>
             <?php } ?>
           </ul>
           <?php } ?>
@@ -88,8 +90,11 @@ $points = array(0 =>"undefined" ,1=>"white", 2=>"black" );
       <div id="blur"></div>
       <div id="m_cont">
           <iframe src="?stat"></iframe>
+          <a href="disconnect.php">Se déconnecter</a>
       </div>
     </div>
+
+    <div class="score">Coups joués <?php echo $len ?> / <?php echo $glen ?></div>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 

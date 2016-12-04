@@ -25,7 +25,7 @@ class GameCtl{
     $len = count($test);
 
     if ($_SESSION["game"]->isTheEnd() && $_SESSION["started"] == true){
-      $this->doTheEndingThing();
+      $this->end();
     }
 
     (new GameView())->launch($test, $res,$len,$_SESSION["game"]->isTheEnd()?$_SESSION["game"]->solution:false,$_SESSION["game"]->getL());
@@ -45,7 +45,7 @@ class GameCtl{
     return $_SESSION["game"]->hasWin();
   }
 
-  public function doTheEndingThing(){
+  public function end(){
     // echo "yaay ".($_SESSION["game"]->hasWin()?"lol":"huhu");
     $_SESSION["started"] = false;
     (new DB())->addGame($_SESSION["username"], $_SESSION["game"]->getCpt(), $_SESSION["game"]->hasWin());

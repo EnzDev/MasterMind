@@ -18,6 +18,8 @@ class Game {
       $this->solution[$n] = randomElement($this->COLORS);
     }
     $this->v = 10;
+
+    // Enregistre les solutions pour déboger plus rapidement (attention, affiché de haut en bas sur la  vue)
     error_log(serialize($this->solution));
 
   }
@@ -57,13 +59,16 @@ class Game {
 
   /**
   * Consider that $case contain 4 elements that are in the $COLORS
+  * If not, it will just be an incorrect color
   */
   public function play($case){
-    $this->proposition[] = $case;
-    // print_r($case);
-    $this->results[] = $this->testACase($case);
-    // print_r($case);
-    return $this->hasWin($case);
+    if (!$this->hasWin()) {
+        $this->proposition[] = $case;
+        // print_r($case);
+        $this->results[] = $this->testACase($case);
+        // print_r($case);
+    }
+    return $this->hasWin();
   }
 
 

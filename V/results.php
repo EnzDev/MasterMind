@@ -10,7 +10,7 @@ class results {
     <link rel="stylesheet" href="_style/reset.css" media="screen">
     <link rel="stylesheet" href="_style/result.css" media="screen">
   </head>
-  <body style="color:#fff">
+  <body>
 
     <h1>Bonjour <?php echo $user ?></h1>
     <div class="m_Last" ><?php switch ($lastGame) {
@@ -28,10 +28,16 @@ class results {
     } ?></div>
 
     <div class="m_avg">
-      Il vous faut environ <?php echo round($cps) ?> coup<?php if(round($cps)>1){echo "s";}?> pour finir une partie.
+      Il vous faut environ <?php echo is_numeric($cps) ? round($cps) : $cps ?> coup<?php if(round($cps)>1){echo "s";}?> pour finir une partie.
     </div>
 
     <div class="m_leader">
+      <ul>
+        <li>Pseudo
+        <li>Parties
+        <li>Gagnées
+        <li>Moyenne
+      </ul>
       <?php foreach ($leader as $cars): ?>
         <ul>
           <li><?php echo $cars["pseudo"]; ?>

@@ -14,9 +14,12 @@ body{
   font-size: 10vh;
   font-weight: 900;
   font-variant: small-caps;
-  color: rgba(210, 210, 225, 0.6);
+  /*color: rgba(210, 210, 225, 0.6);*/
+  color: rgb(100, 150, 200);
   text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
 }
+
+a { color: rgb(100, 150, 200); }
 
 #id, #submit{
   font-size: 2.5vh;
@@ -35,7 +38,7 @@ color: #fff;
   align-items: center;
   font-size: 3vh;
 }
-a, #submit.ok {
+#submit.ok {
   text-shadow: #417cb8 2px 2px 2px;
   cursor: pointer;
 }
@@ -52,7 +55,7 @@ a, #submit.ok {
 
 #noise{
   position: fixed;
-  background: url("./_img/noise.png");
+  /*background: url("./_img/noise.png");*/
   opacity: 0.02;
 
   height: 100vh;
@@ -137,13 +140,15 @@ a, #submit.ok {
 
   width: 5vh;
   height: 5vh;
-    border-radius: 10%;
+    border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.5);
 }
 #head > ul>li{
     width: 2.5vh;
   height: 2.5vh;
 }
+
+#head > ul>li{border-radius: 10%;}
 
 #solution > li{
   width: 5vh;
@@ -154,17 +159,25 @@ a, #submit.ok {
    display: none;
  }
 
+.score{
+  position: fixed;
+  color: rgb(34, 34, 34);
+  bottom: 1vh;
+  left: 1vh;
+}
+
 /* COLORATION */
 /* "rouge", "jaune", "vert", "bleu", "orange", "blanc", "violet", "fuchsia" */
 .black {background: black           !important; border: 1px solid rgba(255,255,255,0.5) !important;}
 .red   {background: rgb(170,33,33)  !important;}
 .green {background: rgb(46,142,31)  !important;}
-.blue  {background: rgb(19,60,130)  !important;}
+.blue  {background: rgb(77,126,210) !important;}
 .orange{background: rgb(217,135,12) !important;}
 .white {background: white           !important;}
 .purple{background: rgb(99,59,173)  !important;}
-.pink  {background: rgb(149,16,148) !important;}
-.yellow{background: rgb(187,187,43) !important }
+.pink  {background: rgb(227,17,225) !important;}
+.yellow{background: rgb(255,234,0)  !important; }
+
 #box{
   display: block;
   height: 43vh;
@@ -191,10 +204,11 @@ a, #submit.ok {
 }
 
 iframe{
-  width: calc(100vw - 6vh);
-  height: 100vh;
-  margin-top: 0.5vh;
-  border-radius: calc((1vh + 1vw) / 2);
+  width: 100%;
+  height: 100%;
+  /*margin-top: 0.5vh;
+  border-radius: calc((1vh + 1vw) / 2);*/
+  padding: 4px;
 }
 
 .container > a {
@@ -218,6 +232,7 @@ iframe{
     cursor: pointer;
     transform: rotate(0deg);
     transition: 0.5s;
+    color: rgb(100, 150, 200);
 }
 
 #menu.active::before { transform: rotate(90deg); }
@@ -231,7 +246,7 @@ iframe{
     right: 0;
     top: 0;
     /*background: #149911;*/
-    height: 100vh;
+    height: 50vh;
     width: 0vw;
     display: flex;
     flex-direction: column;
@@ -240,7 +255,12 @@ iframe{
 
 #m_cont{
   z-index: 3;
-  /*background: #d75516; */
+
+  width: 20vw;
+  height: 33vh;
+  border: solid rgba(220,220,211,.5);
+  border-radius: 0 8px;
+  border-width: 0 0 4px 4px;
 }
 
 
@@ -249,10 +269,10 @@ iframe{
 
   background-position: -100vw 0;
   position: absolute;
-  height: 100vh;
+  height: 50vh;
   width: 100%;
   z-index: 2;
-  background-image: url('./_img/background.jpg');
+  /*background-image: url('./_img/background.jpg');*/
   filter: blur(0vh);
   transition: background-position 0.5s, filter 0.5s;
 }

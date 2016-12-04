@@ -37,11 +37,12 @@
 
    public function __construct(){
     try{
-       $chaine="mysql:host=localhost;dbname=E155122L";
-       $this->connexion = new PDO($chaine,"E155122L","E155122L");
+       $chaine="mysql:host=localhost;dbname=e155122l";
+       $this->connexion = new PDO($chaine,"root","");
        $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       }
      catch(PDOException $e){
+       print_r($e);
        $exception=new ConnexionException("problème de connection à la base");
        throw $exception;
      }
@@ -110,9 +111,8 @@
 
  public function getBestGame($user){
    try{
-     	$statement = $this->connexion->prepare("SELECT partieGagnee, nombreCoups FROM parties ;");
+     	$statement = $this->connexion->prepare("SELECT partieGagnee, nombreCoups FROM parties WHERE pseudo=? ORDER BY nombreCoups ASC LIMIT 10;");
      	$statement->bindParam(1, $user);
-      $statement->bindParam(2, $hashPass);
 
      	$statement->execute();
 
@@ -128,6 +128,8 @@
 
  public function addUser($user, $hashPass){
  try{
+   if ($user=="") {throw new UserExistException("Le pseudo est déjà pris");  }
+
    	$statement = $this->connexion->prepare("INSERT INTO `joueurs`(`pseudo`, `motDePasse`) VALUES (?,?);");
    	$statement->bindParam(1, $user);
     $statement->bindParam(2, $hashPass);
@@ -153,8 +155,10 @@
       $statement->bindParam(1, $user);
 
       $statement->execute();
+
       $result = $statement->fetch()[0];
-      if (empty($result)){ throw new TableAccesException("What did you do ?", 1); }
+
+      if (empty($result)){ return "... "; }
       return $result;
 
  }catch(PDOException $e){
@@ -167,12 +171,12 @@
 
 
 public function leaderBoard(){
-  // NOTE : This is a directy implementation...
+  // NOTE : This is a direct implementation...
   try{
     $gameTable = "CREATE TEMPORARY TABLE xG  (SELECT p.pseudo pseudo, COUNT(*) games FROM joueurs j, parties p WHERE j.pseudo=p.pseudo GROUP BY p.pseudo);";
     $winTable  = "CREATE TEMPORARY TABLE xW  (SELECT p.pseudo pseudo, COUNT(*) win   FROM joueurs j, parties p WHERE j.pseudo=p.pseudo AND p.partieGagnee=1 GROUP BY p.pseudo);";
     $averTable = "CREATE TEMPORARY TABLE xV  (SELECT p.pseudo pseudo, AVG(p.nombreCoups) aver FROM joueurs j, parties p where j.pseudo=p.pseudo AND partieGagnee=1 GROUP BY p.pseudo);";
-    $joinSel   = "SELECT xG.pseudo, games, win, aver from xG, xW, xV where xG.pseudo=xW.pseudo and xV.pseudo=xW.pseudo;";
+    $joinSel   = "SELECT xG.pseudo, games, win, aver from xG, xW, xV where xG.pseudo=xW.pseudo and xV.pseudo=xW.pseudo ORDER BY win/games DESC, aver ASC LIMIT 10; ";
 
     $this->connexion->query($gameTable);
     $this->connexion->query($winTable);
